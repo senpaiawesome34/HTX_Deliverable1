@@ -1,0 +1,45 @@
+**Azure Basics**
+
+Some of the basic features of Azure are:
+1. Tenant/Entra ID - identity directory
+2. Subscription - billing + quota boundary
+3. Resource Group - logical container for related resources
+4. Region - where resources run, e.g. southeastasia, westus
+5. Availability Zones - separate datacentre zones inside some regions for resilience
+6. IAM (RBAC) - who can do what (Reader, Contributor, Owner etc)
+
+
+(A) CLI Basics
+- az login: opens Microsoft sign-in so Azure CLI can act on my account
+- az account show --output table: shows which subscription/tenant is currently active (v important before
+creating rescources)
+- az group create --name rg-fyp-demo --location southeastasia: Creates a Resource Group named rg-fyp-demo
+in Region southeastasia. A resource group is a container for related Azure resources
+- az group list --output table: lists all resource groups I can access, in a readable table
+
+
+(B) Azure OpenAI/Foundry environment table
+1. $env:AZURE_OPENAI_ENDPOINT="https://<your-resource>.openai.azure.com/"
+    Sets the API base URL for Azure OpenAI resource
+2. $env:AZURE_OPENAI_DEPLOYMENT_NAME="<your-deployment-name>"
+    Sets the model deployment name created in Azure (code calls this name, not the raw model family name)
+3. $env:OPENAI_API_VERSION="<api-version-from-docs>"
+    Sets the API contract version SDK request should use
+    Must match a valid version from Azure docs for endpoint/features
+
+
+(C) Python chat call (Azure Endpoint style)
+- Refer to the file AzureEndpoint.ipynb
+- Tried to do it in a .py file but openai not installed
+
+
+(D) "Model Garden" in Azure (Current naming)
+Model Garden is now generally surfaced in Azure AI Foundry MOdels/model catalog
+
+How to access:
+1. Go to Azure AI Foundry
+2. Open Models (catalog)
+3. Filter by provider/capability/task (chat, embeddings, reasoning etc)
+4. Compare model cards/benchmarks
+5. Deploy selected model to an endpoint
+6. Test in playground, then call from code
