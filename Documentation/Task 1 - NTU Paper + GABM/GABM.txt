@@ -1,0 +1,84 @@
+GABM (Generative Agent Based Modelling)
+
+What is it?
+A GABM combines:
+- Agent-Based Modelling (ABM) - many individual agents interact in an environment
+- Generative AI (LLM) - generated richer, human-like behaviour rules instead of hardcoded simple logic
+** in essence, it's "Physics + AI behaviour"
+
+How it works in the NTU paper:
+1. Environment + movement engine - PysocialForce handles motion (speed, repulsion, obstacles,
+exit flow)
+2. Generate behaviour knowledge
+    - Llama 3, via Groq API, is prompted with agent profile + context, e.g. age, gender, Big 5 Traits,
+    room fullness, distance to exit
+    - Output is converted to a structured behavioural grid (behaviour_grid.json),
+    e.g. Impatience State = Yes/No
+3. Simulation-time integration
+    - Each agent is initialised with profile traits
+    - During simulation, behaviour rules from the grid are looked up & used by the behavioural simulator
+    variant to alter dynamics (e.g. impatience related behaviour)
+4. Compare against baseline
+    - Baseline model: Standard social force evacuation (assumes everyone is 'equal', i.e. same Social Forces
+    acting on all entities)
+    - GABM Model: Social Force + LLM-derived behaviour model
+    - Compare evacuation curves, trajectories, congestion patterns
+
+Core Findings:
+- Reported result: behaviour-aware model can evacuate faster in early phase (reported ~167% higher initial 
+evacuation rate), but may increase bottleneck congestion near exits.
+- Key message: more realistic behaviour introduces trade-offs, not just “faster is better”.
+- Captures heterogeneous human responses.
+- Produces more realistic emergent crowd behaviour.
+- Useful for “what-if” emergency planning beyond fixed-rule ABM.
+
+
+GABM (Non-specific, reserach summary):
+According to recent research in the field, GABM addresses the "rationality" gap in traditional models, 
+where agents often behave as perfectly logical actors.
+
+Key Insights
+- Behavioral Nuance: Traditional models often fail to capture the unpredictable nature of human responses 
+in stressful environments like emergency evacuations. LLMs, trained on vast datasets encompassing 
+anthropology and psychology, allow agents to exhibit human-like reasoning, judgment, and emotional responses.
+- Computational Efficiency: A major challenge in GABM is that calling an LLM for every agent at every time 
+step is computationally expensive. Leading research suggests using a "Behavioural Grid"—pre-computing agent 
+responses for various conditions (e.g., personality, room fullness, distance to exit) and loading them 
+as a lookup table during the simulation.
+- Personality Integration: By incorporating the Five-Factor Model (Big Five), agents can be initialized with 
+specific traits like high Neuroticism or low Agreeableness. Research shows these traits are primary 
+determinants of behavior; e.g. high neuroticism often leads to increased impatience during bottlenecks.
+
+Performance impacts of GABM
+- Evacuation Rates: Personality-driven "impatience model" achieved a 167% higher initial evacuation rate 
+than a standard baseline (this is the NTU Paper; already mentioned before)
+- Group Dynamics: GABM can simulate social cohesion, where agents prioritize staying with their group
+(e.g., family or friends) rather than just reaching the exit. While this can slow down initial movement,
+group-cohesion models often complete full evacuations faster overall than pure impatience models.
+- Predictive Factors: Using machine learning (like Random Forest) to analyze LLM-generated behaviors 
+reveals that Neuroticism (32.4% influence) and Agreeableness (19.9% influence) are the strongest 
+predictors of whether an agent will become "impatient" in a crowd.
+
+Addressing the 'Black Box' Problem
+It is often unclear why an agent chooses a specific action (black box nature of LLMs).
+To address this, researchers:
+1. Use Random Forest to reverse engineer the LLM's logic
+2. Compare spatial distributions of agents at specific time steps to see if "clusters" of certain 
+personalities form in ways that match real-world observations.
+
+
+References:
+1. Generative Agents: Interactive Simulacra of Human Behavior (Park et al., 2023)
+Seminal paper demonstrating how LLMs can power autonomous agents in a social environment.
+Link: https://arxiv.org/abs/2304.03442
+
+2. Social Force Model for Pedestrian Dynamics (Helbing & Molnár, 1995)
+Foundational physics-based model that most modern evacuation GABMs are built upon.
+Link: https://journals.aps.org/pre/abstract/10.1103/PhysRevE.51.4282
+
+3. The "Faster-is-Slower" Effect in Crowds (Helbing et al., 2000)
+Explains the physical bottlenecks that occur when agents are too "impatient" - a key concept GABM 
+aims to refine.
+Link: https://www.nature.com/articles/35035023
+
+4. The NTU Paper (already referenced within the folder)
