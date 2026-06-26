@@ -1,1 +1,5 @@
 point_id,x_px,y_px,x_m,y_m,notes
+P1,200,700,,,lower-left / near-left road-plane corner
+P2,400,450,,,upper-left / far-left road-plane corner
+P3,1700,700,,,lower-right / near-right road-plane corner
+P4,1250,450,,,upper-right / far-right road-plane corner
