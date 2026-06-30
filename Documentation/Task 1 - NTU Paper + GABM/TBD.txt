@@ -1,0 +1,6 @@
+given a video, use the process to get the appropriate info to 
+supplement it. from this video, we want to obtain the parameters 
+for the SFM (i.e. people in this video). 
+
+Have a CV model to see how people move from 1 frame to the other; 
+feed into SFM Estimator...

@@ -1,0 +1,7 @@
+point_id,x_px,y_px,x_m,y_m,notes
+P1,,,,,road-plane point; fill pixel and metre coordinates
+P2,,,,,road-plane point; fill pixel and metre coordinates
+P3,,,,,road-plane point; fill pixel and metre coordinates
+P4,,,,,road-plane point; fill pixel and metre coordinates
+P5,,,,,optional extra point for a more stable fit
+P6,,,,,optional extra point for a more stable fit
