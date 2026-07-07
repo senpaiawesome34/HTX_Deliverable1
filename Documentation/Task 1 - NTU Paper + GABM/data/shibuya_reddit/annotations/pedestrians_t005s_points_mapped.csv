@@ -1,0 +1,11 @@
+point_id,x_px,y_px,x_m,y_m,notes
+P1,628,531,18.573402,1.5091472,selected using coords.py; fill x_m/y_m manually
+P2,275,421,8.296074,18.926487,selected using coords.py; fill x_m/y_m manually
+P3,664,289,33.212334,23.30593,selected using coords.py; fill x_m/y_m manually
+P4,290,605,4.687493,3.1179216,selected using coords.py; fill x_m/y_m manually
+P5,791,464,27.23255,2.823267,selected using coords.py; fill x_m/y_m manually
+P6,352,433,11.3365555,15.616246,selected using coords.py; fill x_m/y_m manually
+P7,517,268,27.596321,31.553432,selected using coords.py; fill x_m/y_m manually
+P8,223,340,8.30068,30.905102,selected using coords.py; fill x_m/y_m manually
+P9,218,535,3.251734,9.620375,selected using coords.py; fill x_m/y_m manually
+P10,629,370,26.082584,14.749306,selected using coords.py; fill x_m/y_m manually

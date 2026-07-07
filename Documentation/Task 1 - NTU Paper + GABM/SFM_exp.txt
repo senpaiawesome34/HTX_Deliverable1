@@ -1,0 +1,68 @@
+This configuration file defines the parameters for a Social Force Model (SFM), a mathematical framework where 
+pedestrian motion is governed by a summation of "forces" representing physical and psychological motivations
+.
+Based on the sources, here is an explanation of these parameters and how they relate to the dynamics 
+and calibration of the model:
+
+
+1. Scene Parameters ([scene])
+These define the physical constraints of the environment and the agents.
+- enable_group: When set to true, the model accounts for group dynamics 
+    (e.g., friends or families walking together), adding specific forces for coherence and gaze
+- agent_radius: The physical space an agent occupies. While your config uses 0.35m, source
+    suggests a calibrated value of 0.27m for general studies, while Source
+    uses 0.2m for collision rate calculations.
+- max_speed_multiplier: This prevents agents from reaching unrealistic speeds. 
+    In your config, it is 1.3x the initial speed. Source notes that the typical maximum 
+    velocity (v max) for humans is approximately 2.5 m/s.
+
+
+2. Desired Force ([desired_force])
+Also known as the Destination Force, this represents the agent’s motivation to reach a specific goal
+factor: The weighting of this force in the total calculation
+- goal_threshold: The distance (in meters) at which the agent considers the goal reached. 
+    Source describes a similar parameter (σ des) that reduces the desired speed as the agent 
+    approaches the destination.
+- relaxation_time: In your config, this is 0.5s. This is a critical parameter (often denoted as τ) 
+    representing the time it takes for an agent to adjust their current velocity to their desired velocity
+
+
+3. Social Force ([social_force])
+This represents the repulsive force between pedestrians to maintain personal space and avoid collisions
+lambda_importance: This defines the anisotropy of the force—how much more an agent is affected by people 
+in front of them versus behind them
+- gamma, n, n_prime: These are specific to the Moussaid-Helbing (2009) heuristic model mentioned in 
+your config comments. They define the "speed interaction" and "angular interaction" of how pedestrians 
+steer to avoid each other
+
+
+4. Obstacle Force ([obstacle_force])
+This models how agents steer away from walls or environmental barriers
+- sigma: A parameter that modifies the smoothness of the force decay as the agent gets closer to an obstacle
+- threshold: The distance (3.0m in your config) at which an agent begins to feel the "repulsion" from an obstacle
+
+
+5. Group Forces
+These parameters manage the internal dynamics of a walking group
+- group_coherence_force: Keeps group members close to one another
+- group_repulsive_force: Prevents group members from overlapping while maintaining a shared path
+- group_gaze_force: Models the "field of view" (fov_phi = 90.0) within which agents interact with their group member
+
+
+**How to Calibrate This Model**
+To calibrate these parameters for a specific location, the sources recommend the following steps:
+Select a Dataset: Use a dataset that provides top-view (nadir) video, as this makes mapping pixels to meters easiest
+.
+Edinburgh Informatics Forum: Provides an exact pixel scale (24.7 mm per pixel) and physical markers on the floor for easy math
+.
+DUT Dataset: Features natural interactions in "shared spaces" (like public squares) recorded by drones
+.
+Extract Trajectories: Extract the "ground truth" paths of real pedestrians from the video. Source
+ suggests using Kalman filters to refine these trajectories and estimate real-world velocities.
+Run a Genetic Algorithm (GA): The sources strongly recommend using a Genetic Algorithm for calibration
+.
+Initialize the GA with your current config values
+.
+The GA will simulate agents and compare their paths to the ground truth using Mean Square Error (MSE) as a loss function
+.
+Iteratively adjust the parameters until the simulated behavior converges with the real-world trajectories
