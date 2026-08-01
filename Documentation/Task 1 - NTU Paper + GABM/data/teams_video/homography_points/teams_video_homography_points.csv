@@ -1,0 +1,5 @@
+point_id,x_px,y_px,x_m,y_m,notes
+P1,129,446,0,60,selected using coords.py; fill x_m/y_m manually
+P2,407,442,22,60,selected using coords.py; fill x_m/y_m manually
+P3,15,956,0,0,selected using coords.py; fill x_m/y_m manually
+P4,531,954,22,0,selected using coords.py; fill x_m/y_m manually

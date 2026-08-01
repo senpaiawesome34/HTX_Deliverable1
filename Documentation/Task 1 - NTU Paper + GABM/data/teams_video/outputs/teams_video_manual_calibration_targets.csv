@@ -1,0 +1,2 @@
+video_id,n_speed_observations,n_pedestrians,mean_speed_mps,median_speed_mps,std_speed_mps,p10_speed_mps,p90_speed_mps,p95_speed_mps,max_speed_mps,n_above_review_speed,review_speed_above_mps,mean_direction_deg,mean_nn_spacing_m,median_nn_spacing_m
+teams_video,295,10,1.3163349662503327,1.1800981154206052,0.8773939028806444,0.2757790896007439,2.5220744076493635,3.0530585977718783,4.117753861000234,0,7.0,16.63693634839322,8.649743810683978,7.937193082895559
